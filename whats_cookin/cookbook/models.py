@@ -30,14 +30,26 @@ class Category(models.Model):
 
 
 class Recipe(models.Model):
+    CATEGORIES = (
+        ('breakfast', 'Breakfast'),
+        ('lunch', 'Lunch'),
+        ('dinner', 'Dinner'),
+        ('dessert', 'Dessert'),
+        ('snack', 'Snack'),
+        ('beverage', 'Beverage'),
+        ('other', 'Other')
+    )
     title = models.CharField(u'Title', max_length=200)
-    slug = models.SlugField(unique=True)
-    category = models.ManyToManyField(Category, verbose_name=u'Categories')
+    # slug = models.SlugField(unique=True)
+    # category = models.ManyToManyField(Category, verbose_name=u'Categories')
+    category = models.CharField(
+        max_length=15, choices=CATEGORIES, default='green')
     ingredients = models.TextField(
         u'Ingredients', help_text=u'One ingredient per line')
     preparation = models.TextField(u'Preparation')
-    pub_date = models.DateField(
-        'date published', default=timezone.now)
+    link = models.TextField(u'Link(s)', default='')
+    # pub_date = models.DateField(
+    #     'date published')
 
     class Meta:
         verbose_name = u'Recipe'
@@ -47,8 +59,8 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title
 
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+    # def was_published_recently(self):
+    #     return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 
 # class Choice(models.Model):

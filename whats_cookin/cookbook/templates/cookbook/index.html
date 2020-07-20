@@ -1,0 +1,18 @@
+<!-- Because of how the app_directories template loader works,
+    you can refer to this template within Django as cookbook/index.html. -->
+
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-center mb-3">Cookbook</h1>
+<!-- see 'views.py' -->
+{% if latest_recipe %} {% for recipe in latest_recipe %}
+<div class="card mb-3">
+  <div class="card-body">
+    <p class="lead">{{recipe.title}}</p>
+    <li>
+      <a href="{% url 'detail' recipe.id %}">{{ recipe.title }}</a>
+    </li>
+  </div>
+</div>
+{% endfor %} {% else %}
+<p>No recipes available</p>
+{% endif %} {% endblock %}

@@ -5,3 +5,4 @@ from django.contrib import admin
 from .models import Recipe
 
 admin.site.register(Recipe)
+admin.site.site_header = "What's Cookin' (Admin)"
