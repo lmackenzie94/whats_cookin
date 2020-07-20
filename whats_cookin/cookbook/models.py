@@ -45,9 +45,10 @@ class Recipe(models.Model):
     category = models.CharField(
         max_length=15, choices=CATEGORIES, default='green')
     ingredients = models.TextField(
-        u'Ingredients', help_text=u'One ingredient per line')
-    preparation = models.TextField(u'Preparation')
-    link = models.TextField(u'Link(s)', default='')
+        u'Ingredients', help_text=u'One ingredient per line', blank=True)
+    preparation = models.TextField(u'Preparation', blank=True)
+    link = models.TextField(u'Link(s)', default='', blank=True)
+    photo = models.ImageField(upload_to='images', blank=True)
     # pub_date = models.DateField(
     #     'date published')
 

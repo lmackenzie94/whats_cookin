@@ -2,17 +2,33 @@
     you can refer to this template within Django as cookbook/index.html. -->
 
 {% extends 'base.html' %} {% block content %}
-<h1 class="text-center mb-3">Cookbook</h1>
-<!-- see 'views.py' -->
-{% if latest_recipe %} {% for recipe in latest_recipe %}
-<div class="card mb-3">
-  <div class="card-body">
-    <p class="lead">{{recipe.title}}</p>
-    <li>
-      <a href="{% url 'detail' recipe.id %}">{{ recipe.title }}</a>
-    </li>
+<h1 class="text-center mb-5">Cookbook</h1>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+  {% if latest_recipe %} {% for recipe in latest_recipe %}
+  <div class="col mb-4">
+    <div class="card">
+      {% load static %} 
+      {% if recipe.photo %}
+      <img src="{{recipe.photo.url}}" alt="{{recipe.title}} image" style="max-height: 200px; object-fit: cover;">
+      {% else %}
+      <img src="{% static "cookbook/image-placeholder.jpg" %}"
+      alt="{{recipe.title}} image" style="max-height: 200px; object-fit: cover;">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{recipe.title}}</h5>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+        <a href="{% url 'detail' recipe.id %}" class="btn btn-warning"
+          >View Recipe</a>
+      </div>
+    </div>
   </div>
+  {% endfor %} {% else %}
+    <p>No recipes available</p>
+  </div>
+  {% endif %}
 </div>
-{% endfor %} {% else %}
-<p>No recipes available</p>
-{% endif %} {% endblock %}
+
+{% endblock %}

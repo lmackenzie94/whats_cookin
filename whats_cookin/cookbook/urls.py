@@ -8,5 +8,5 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     # ex: /cookbook/5/
-    path('<int:recipe_id>', views.detail, name='detail')
+    path('<int:recipe_id>/', views.detail, name='detail')
 ]

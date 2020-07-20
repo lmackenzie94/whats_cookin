@@ -18,9 +18,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # point the root URLconf at the cookbook.urls module
     path('cookbook/', include('cookbook.urls')),
     path('admin/', admin.site.urls)
 ]
+
+# With this, Django’s development server is capable of serving media files
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
