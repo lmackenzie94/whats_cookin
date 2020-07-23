@@ -4,9 +4,11 @@ from django.urls import path
 
 from . import views
 
+# allows Django to differentiate the URL names between multiple apps in a given project
+app_name = 'cookbookNamespace'
 # this maps the view to a URL
 urlpatterns = [
     path('', views.index, name='index'),
     # ex: /cookbook/5/
-    path('<int:recipe_id>/', views.detail, name='detail')
+    path('recipes/<int:recipe_id>/', views.detail, name='detail')
 ]
