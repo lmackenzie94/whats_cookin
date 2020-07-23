@@ -1,6 +1,6 @@
 # Create your models here.
 """
-- Each model is represented by a class that subclasses django.db.models.Model. 
+- Each model is represented by a class that subclasses django.db.models.Model.
 - Each model has a number of class variables, each of which represents a database field in the model.
 
 With this info, Django is able to:
@@ -44,10 +44,13 @@ class Recipe(models.Model):
     # category = models.ManyToManyField(Category, verbose_name=u'Categories')
     category = models.CharField(
         max_length=15, choices=CATEGORIES, default='green')
+    description = models.CharField(max_length=250, blank=True)
     ingredients = models.TextField(
         u'Ingredients', help_text=u'One ingredient per line', blank=True)
     preparation = models.TextField(u'Preparation', blank=True)
-    link = models.TextField(u'Link(s)', default='', blank=True)
+    tips = models.TextField(u'Helpful Tips', blank=True)
+    link = models.TextField(
+        u'Link(s)', default='', blank=True)
     photo = models.ImageField(upload_to='images', blank=True)
     # pub_date = models.DateField(
     #     'date published')
@@ -59,6 +62,18 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+
+    def ingredients_as_list(self):
+        return self.ingredients.replace('\r', '').split('\n')
+
+    def preparation_as_list(self):
+        return self.preparation.replace('\r', '').split('\n')
+
+    def links_as_list(self):
+        return self.link.replace('\r', '').split('\n')
+
+    def tips_as_list(self):
+        return self.tips.replace('\r', '').split('\n')
 
     # def was_published_recently(self):
     #     return self.pub_date >= timezone.now() - datetime.timedelta(days=1)

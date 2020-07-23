@@ -2,10 +2,14 @@
     you can refer to this template within Django as cookbook/index.html. -->
 
 {% extends 'base.html' %} {% block content %}
-<h1 class="text-center mb-5">Cookbook</h1>
+<div class="text-center border-bottom mb-5">
+<h1 class="d-inline-block">Luke's Recipes</h1>
+<a href="{% url 'cookbookNamespace:add' %}" style="font-size: 40px; margin-left: 15px;">+</a>
+</div>
+
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
   {% if latest_recipe %} {% for recipe in latest_recipe %}
-  <div class="col mb-4">
+  <div class="col mb-5">
     <div class="card">
       {% load static %} 
       {% if recipe.photo %}
@@ -16,11 +20,13 @@
       {% endif %}
       <div class="card-body">
         <h5 class="card-title">{{recipe.title}}</h5>
+        {% if recipe.description %}
         <p class="card-text">
           This is a longer card with supporting text below as a natural lead-in
           to additional content. This content is a little bit longer.
         </p>
-        <a href="{% url 'cookbookNamespace:detail' recipe.id %}" class="btn btn-warning"
+        {% endif %}
+        <a href="{% url 'cookbookNamespace:detail' recipe.id %}" class="btn btn-warning mt-2"
           >View Recipe</a>
       </div>
     </div>

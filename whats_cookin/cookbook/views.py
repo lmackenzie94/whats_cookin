@@ -34,3 +34,7 @@ def detail(request, recipe_id):
 def results(request, recipe_id):
     response = "You're looking at the results of recipe %s."
     return HttpResponse(response % recipe_id)
+
+
+def add(request):
+    return render(request, 'cookbook/add.html')

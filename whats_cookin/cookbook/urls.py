@@ -10,5 +10,7 @@ app_name = 'cookbookNamespace'
 urlpatterns = [
     path('', views.index, name='index'),
     # ex: /cookbook/5/
-    path('recipes/<int:recipe_id>/', views.detail, name='detail')
+    path('recipes/add', views.add, name='add'),
+
+    path('recipes/<int:recipe_id>/', views.detail, name='detail'),
 ]
